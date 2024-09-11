@@ -1,21 +1,26 @@
 
-from flask import Flask, render_template #Aqui redenterizamos os arquivos dentro da nossa pasta templates, pois essa foi a forma que o flask encontrou de conseguir entender que o código deverá rodar uma home page para uma das páginas, logo, todas as páginas devem estar dentro do arquivo templates para que elas sejam encontradas e executadas.
+from flask import Flask, render_template, url_for #o url_for permite usar o nome da função como diretório da página e não mais a direção informada no route pois podemos em algum momento querer mudar, no caso da função não tem porque essa mudança
 
 
 app = Flask(__name__) 
 
-@app.route("/")  # esssa esstrutura com o @ é um pouco diferente do que já vimos no python. o mesmo atribui funcionalidade a função abaixo, que ieremos fazer uso.Logo,  para criação de novos links sempre será necessário a criação desses dois em conjunto
 
+
+
+@app.route("/") 
 def homepage(): 
-    return render_template("homepage.html") # Agora chamando a função render_template e passando o nome do arquivo, conseguimos acessá-lo dentro da nossa página templates
-
-@app.route("/perfil") # veja que para a criação do link para perfil do usuário seria necessária a criação de um route para o mesmo e também uma função para agregar valor para o mesmo, que no caso será a função perfil abaixo.
-
-def perfil(): 
-    return render_template("perfil.html") # Aqui por exemplo poderiamos cirar todo o conteúdo da página, porém isso deixaria o nosso código muito sujo e repleto de informações, que poderiam confundir a nossa cabeça.
-    #Logo deveremos fazer essa criação externamente, dentro de uma pasta que daremos o nome de templates, e dentro da mesma crianriaremos os nossos arquivos do tipo html, para cada uma das nossas páginas dentro do nosso site.
+    return render_template("homepage.html")
 
 
+
+# Agora imagina se tivessemso que criar esse perfil de usuário para todos os usuários, se tivessemos por exemplo 1000 usuários teriámos muitas dificuldades nosso. logo, temos de fazer isso tornar-se algo dinâmico e que se altere para cada um dos usuários porém mantendo a mesma estrutura que os demais.
+
+
+@app.route("/perfil/<usuario>") # para tal devemos por o nome usuário logo após uma barra e o mesmo dento de tags <usuári> a mesma dis que isso é variável, da mesma forma faremos para a função que a acompanha só que sem as tags
+def perfil(usuario): # agora a funão que exibe um perfil na tela é a função usuário. para que a mesma seja carregada em seu template é só adicionala a ele 
+    return render_template("perfil.html", usuario = usuario, idade = 25)# isso me permite passar parãmetros para o meu html onde irei conseguir fazer cahamdas com o python dentro do própio html. para informações passadas aqui
+
+# Dessa forma mesmo que você tenha um milhão de usuário, os mesmos terão seu próprio perfil com suas inoformações
 
 if __name__ == "__main__":
     app.run(debug= True) 
