@@ -1,0 +1,18 @@
+{%extends "homepage.html"%}
+
+{% block titulo %}
+    perfil usuário
+{% endblock %}
+
+{% block body %} 
+
+<body>
+    <h1>Perfil que iremos ter dentro da nossa página</h1>
+    {{idade}}
+
+    <p><a href="{{url_for('homepage')}}">Sair</a></p> 
+
+  
+</body>
+
+{% endblock %}
