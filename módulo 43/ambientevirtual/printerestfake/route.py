@@ -1,5 +1,6 @@
 #Criação das rotas do noss siite
 from flask import render_template, url_for 
+from printerestfake import app
 
 
 @app.route("/") 
