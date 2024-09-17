@@ -1,1 +1,0 @@
-# criação das estrutura do nosso banco de dados
