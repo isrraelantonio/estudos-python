@@ -12,6 +12,26 @@
 {%block body %}
 <body>
     <h1 style=" color:blue; font-size: 0.9em; border: black solid 2px; padding: 30px;">Olá mundo, esse é meu primeiro site aprendendo a criar páginas com o Flask</h1>
+
+
+    {%block formulario %}
+    <form method="post">
+
+        {{form.csrf_token}}
+
+        {{form.email}}
+        {{form.email.label()}}
+
+        {{form.senha}}
+        {{form.senha.label()}}
+
+        {{form.botao}}
+        {{form.botao.label()}}
+
+       
+
+    </form>
+     {% endblock %}
 </body>
 {% endblock %}
 </html>
