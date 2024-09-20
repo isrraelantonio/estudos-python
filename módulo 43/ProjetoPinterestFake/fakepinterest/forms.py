@@ -14,16 +14,16 @@ class FormLogin(FlaskForm):
 class FormCriarConta(FlaskForm):
     email= StringField("E-mail", validators= [DataRequired(), Email()]) 
     username = StringField("Nome de Usuário", validators=[DataRequired()])
-    senha = PasswordField("senha",validators= [DataRequired(), Length(6,20)] ) 
-    confirmacao_senha = PasswordField("Confirme a senha,", validators=[DataRequired(), EqualTo("Senha")] )
+    senha = PasswordField("senha",validators= [DataRequired(), Length(6, 20)] ) 
+    confirmacao_senha = PasswordField("Confirme a senha,", validators=[DataRequired(), EqualTo("senha")] )
     botao_confirmacao = SubmitField("Criar conta")
 
 
 
  
 
-def validate_email(self, email):
-   
-    usuario = Usuario.query.filter_by(email = email.data).first()
-    if usuario :
-        return ValidationError("E-mail já cadastrado, faça login para continuar")
+    def validate_email(self, email):
+    
+        usuario = Usuario.query.filter_by(email = email.data).first() #esse .first fala que no primeiro usuário que encontar igual
+        if usuario :
+            return ValidationError("E-mail já cadastrado, faça login para continuar")
