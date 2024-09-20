@@ -1,11 +1,11 @@
-{% extends "homepage.html"%}
+{% extends "homepage.html"%}  
 
 {%block titulo %}
-Criação de conta
+Criação de conta 
 {% endblock %}
 
-{%block formulario %}
-<form method="post">
+{%block formulario %} 
+<form method="POST">
 
     {{form.csrf_token}}
 
@@ -22,7 +22,7 @@ Criação de conta
     {{form.confirmacao_senha.label()}}
 
     {{form.botao_confirmacao}}
-    {{form.botao_confirmacao.label()}}
+   
 
    
 
