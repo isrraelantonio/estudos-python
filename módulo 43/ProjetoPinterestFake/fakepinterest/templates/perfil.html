@@ -9,7 +9,7 @@
 {%block body %}
 
 <body>
-    <h1 style=" color:blue; font-size: 0.9em; border: black solid 2px; padding: 30px;">Olá {{usuario}}</h1>
+    <h1 style=" color:blue; font-size: 0.9em; border: black solid 2px; padding: 30px;">Olá {{usuario.username}}</h1>
    
    
    <p style=" color:blue; font-size: 0.9em; border: black solid 2px; padding: 3px;">
@@ -17,8 +17,13 @@
     </p>
 
     <a href="{{url_for('logout')}}" style=" color:blue; font-size: 0.9em; border: black solid 2px; padding: 3px;">sair</a>
+
+    <img src="{{url_for('static', filename= 'OIP.jfif')}}">
 </body>
 
+
+{%for foto in usuario.fotos%} <!--Como nós sabemso dentro do nosso html podemos dessa forma fazer a inserção do  pyhton. nesse caso podemos inclusive usar estruturas de repetição como no caso do for, perceba que a abertura e o fechamento do bloco são diferentes do que estamos acostumados e que a condição fica dentro da linha de abertura do nosso código. Ela fala o seguinte:  exiba todas as fotos do usuário-->
+{%endfor%}
 
 
 {% endblock %}
