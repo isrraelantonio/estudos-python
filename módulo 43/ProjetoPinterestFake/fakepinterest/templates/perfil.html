@@ -9,8 +9,22 @@
 {%block body %}
 
 <body>
+
+  
+
     <h1 style=" color:blue; font-size: 0.9em; border: black solid 2px; padding: 30px;">Olá {{usuario.username}}</h1>
-   
+
+     {% if form %}
+    <form method="POST" enctype="multipart/form-data">
+        {{form.crsf_token }}
+
+        {{ form.foto()  }}
+        {{ form.botao_contfirmacao() }}
+
+    </form>
+
+
+    {% endif %}
    
    <p style=" color:blue; font-size: 0.9em; border: black solid 2px; padding: 3px;">
         {{idade}}
