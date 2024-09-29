@@ -4,6 +4,8 @@ from fakepinterest import app, database, bcrypt
 from flask_login import login_required, login_user, logout_user, current_user 
 from fakepinterest.forms import FormLogin, FormCriarConta, FormFoto
 from fakepinterest.models import Usuario, Foto 
+import os 
+from werkzeug.utils import secure_filename
 
 
 
@@ -45,6 +47,18 @@ def perfil(id_usuario):
      if int(id_usuario) == int(current_user.id): # estamos verificando se o usuário do perfil é o mesmo que está logado na conta agora pelo id
           # Nesse caso o usuário estará vendo o seu própio perfil
             form_foto = FormFoto()
+            if form_foto.validate_on_submit():
+                 arquivo = form_foto.foto.data
+                 nome_seguro = secure_filename(arquivo.filename)
+                 #salvar o arquivo na pasta fotos post
+                 caminho = os.path.join(os.path.abspath(os.path.dirname(__file__)),app.config["UPLOAD_FOLDER"],nome_seguro)
+                 arquivo.save(caminho)
+
+                 #registrar esse arquivo no banoc de dados
+                 foto = Foto(imagem = nome_seguro, id_usuario = current_user.id)
+                 database.session.add(foto)
+                 database.session.commit()
+                 
             return render_template("perfil.html", usuario = current_user, form = form_foto) 
      else:
           # Nesse caso o usuário estará vendo o perfi de outro usuário.

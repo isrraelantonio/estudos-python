@@ -11,6 +11,9 @@ app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///comunidade.db"
 app.config["SECRET_KEY"] = "f9bf78b9a18ce6d46a0cd2b0b86df9da" 
 database = SQLAlchemy(app) 
 
+app.config["UPLOAD_FOLDER"] = "static/fotos_post"
+
+
 bcrypt = Bcrypt(app)
 login_manager = LoginManager(app)
 
