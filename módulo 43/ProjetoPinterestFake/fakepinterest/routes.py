@@ -30,11 +30,9 @@ def criarconta():
      formcriarconta = FormCriarConta() 
      if formcriarconta.validate_on_submit(): 
           senha = bcrypt.generate_password_hash(formcriarconta.senha.data)
-
-          usuario = Usuario(email = formcriarconta.email.data, username = formcriarconta.username.data,senha = senha)
+          usuario = Usuario(email = formcriarconta.email.data, username = formcriarconta.username.data, senha = senha)
           database.session.add(usuario)
           database.session.commit()
-          
           login_user(usuario, remember = True)
           return redirect(url_for("perfil", id_usuario = usuario.id)) # bo nossso redirecionamento estamos informando que o usuário não será mais selecionado pelo nome e sim pelo id, dentro da nossa tabela 
      return render_template("criarconta.html", form = formcriarconta)
